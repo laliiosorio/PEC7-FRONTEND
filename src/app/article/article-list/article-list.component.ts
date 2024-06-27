@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Article } from '../article.model';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
-import { ArticleService } from '../services/article.service';
+import { ArticleQuantityChange } from '../../models/article-quantity-change.model';
+import { ArticleService } from '../../services/article.service';
+import { Article } from '../../models/article.model';
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
@@ -17,7 +18,7 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit(): void {
     this.articles = this.searchTerms.pipe(
-      startWith(''), // Emit a default search term to load all articles initially
+      startWith(''), 
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) => this.articleService.getArticles(term))
@@ -30,14 +31,8 @@ export class ArticleListComponent implements OnInit {
     this.searchTerms.next(inputElement.value);
   }
 
-  onQuantityChange(change: { article: Article, quantity: number }) {
+  onQuantityChange(change: ArticleQuantityChange) {
     this.articleService.changeQuantity(change.article.id, change.quantity).subscribe();
   }
 
-}
-
-
-export interface ArticleQuantityChange {
-  article: Article;
-  quantity: number;
 }

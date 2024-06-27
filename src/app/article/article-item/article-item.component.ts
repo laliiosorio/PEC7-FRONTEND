@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Article } from '../article.model';
-import { ArticleQuantityChange } from '../article-list/article-list.component';
+import { Article } from '../../models/article.model';
+import { ArticleQuantityChange } from '../../models/article-quantity-change.model';
 
 @Component({
   selector: 'app-article-item',

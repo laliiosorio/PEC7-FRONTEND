@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Article } from '../article.model'; // Asegúrate de tener un modelo Article
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Article } from '../models/article.model';
 
 @Injectable({
   providedIn: 'root',

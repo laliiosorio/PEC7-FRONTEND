@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { ArticleService } from '../services/article.service';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
-  selector: 'app-article-new-reactive',
-  templateUrl: './article-new-reactive.component.html',
-  styleUrls: ['./article-new-reactive.component.css']
+  selector: 'app-article-new',
+  templateUrl: './article-new.component.html',
+  styleUrls: ['./article-new.component.css']
 })
-export class ArticleNewReactiveComponent implements OnInit {
+export class ArticleNewComponent implements OnInit {
   articleForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private articleService: ArticleService) { }
