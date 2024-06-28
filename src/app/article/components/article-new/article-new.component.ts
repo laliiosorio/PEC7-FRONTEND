@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArticleService } from '../../services/article.service';
+import { NameArticleValidator } from '../../validators/name-article-validator';
 
 @Component({
   selector: 'app-article-new',
@@ -14,16 +15,11 @@ export class ArticleNewComponent implements OnInit {
 
   ngOnInit() {
     this.articleForm = this.fb.group({
-      name: ['', [Validators.required, this.forbiddenNameValidator]],
+      name: ["", [Validators.required, NameArticleValidator.nameArticleValidator]],
       price: [null, [Validators.required, Validators.min(0.1)]],
       imageUrl: ['', [Validators.required, Validators.pattern('https?://[^\\s/$.?#].[^\\s]*\\.(jpg|jpeg|png|gif)')]],
       isOnSale: [false]
     });
-  }
-
-  forbiddenNameValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    const forbiddenNames = ['Prueba', 'Test', 'Mock', 'Fake'];
-    return forbiddenNames.includes(control.value) ? { forbiddenName: true } : null;
   }
 
   onSubmit() {

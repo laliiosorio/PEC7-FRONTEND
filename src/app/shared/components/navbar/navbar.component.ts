@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthStoreService } from '../../services/auth-store.service';
 import { Router } from '@angular/router';
+import { AuthStoreService } from '../../../auth/services/auth-store.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,3 +21,4 @@ export class NavbarComponent {
     this.router.navigate(['/']);
   }
 }
+

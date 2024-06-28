@@ -35,11 +35,13 @@ export class LoginComponent {
 
           localStorage.setItem('authToken', response.token);
           this.authStore.setAuthenticationStatus(true);
-          this.router.navigate(['/']);
+
+          
+          this.router.navigate(['/aticle/create']);
         },
         error => {
           // Handle login error
-          console.error('Login error', error);
+          console.error('Login error', error.error);
         }
       );
     }

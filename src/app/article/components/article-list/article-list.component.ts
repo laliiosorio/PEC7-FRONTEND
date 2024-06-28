@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
-import { ArticleQuantityChange } from '../../models/article-quantity-change.model';
 import { ArticleService } from '../../services/article.service';
+import { ArticleQuantityChange } from '../../models/article-quantity-change.model';
 import { Article } from '../../models/article.model';
+
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
-  styleUrl: './article-list.component.css'
+  styleUrls: ['./article-list.component.css'] // Corregido el atributo a styleUrls
 })
 export class ArticleListComponent implements OnInit {
 
@@ -23,7 +24,6 @@ export class ArticleListComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((term: string) => this.articleService.getArticles(term))
     );
-
   }
 
   onSearch(event: Event): void {

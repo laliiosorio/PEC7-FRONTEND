@@ -1,43 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ArticleItemComponent } from './article/article-item/article-item.component';
-import { ArticleListComponent } from './article/article-list/article-list.component';
-import { ArticleNewComponent } from './article/article-new/article-new.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { ArticleDetailComponent } from './article/article-detail/article-detail.component';
-import { AuthGuard } from './guards/auth-guard.service';
+import { ArticleListComponent } from './article/components/article-list/article-list.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ArticleListComponent,
+  { 
+    path: '', 
+    component: ArticleListComponent, 
+    pathMatch: 'full' 
   },
-  {
-    path: 'login',
-    component: LoginComponent,
+  { 
+    path: 'auth', 
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) 
   },
-  {
-    path: 'register',
-    component: RegisterComponent,
+  { 
+    path: 'article', 
+    loadChildren: () => import('./article/article.module').then(m => m.ArticleModule) 
   },
-  {
-    path: 'article/list',
-    component: ArticleListComponent,
-  },
-  {
-    path: 'article/create',
-    component: ArticleNewComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'article/:id',
-    component: ArticleDetailComponent,
-  },
+  { 
+    path: '**', 
+    redirectTo: '' 
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
