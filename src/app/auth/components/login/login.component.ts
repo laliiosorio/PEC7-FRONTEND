@@ -29,18 +29,12 @@ export class LoginComponent {
       const { username, password } = this.loginForm.value;
       this.authService.login(username, password).subscribe(
         response => {
+          console.log('User login successful:', response);
 
-          // Handle successful login
-          console.log('User login', response);
-
-          localStorage.setItem('authToken', response.token);
-          this.authStore.setAuthenticationStatus(true);
-
-          
-          this.router.navigate(['/aticle/create']);
+          this.authStore.login(response.token);
+          this.router.navigate(['/']);
         },
         error => {
-          // Handle login error
           console.error('Login error', error.error);
         }
       );

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthStoreService } from './auth/services/auth-store.service';
 
 @Component({
@@ -9,10 +9,19 @@ import { AuthStoreService } from './auth/services/auth-store.service';
 })
 export class AppComponent {
   constructor(private router: Router, private authStore: AuthStoreService) {
-    // Verificar el estado de autenticación al cargar la aplicación 
-    if (!this.authStore.getAuthenticationStatus()) {
-      // Si no está autenticado, redirigir al componente de login
-      this.router.navigate(['auth/login']);
-    }
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        console.log('NavigationEnd event:', evt);
+        if (evt.url === '/') {
+          console.log('Handling login route');
+          // Override the route reuse strategy
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          // Trick the Router into believing it's last link wasn't previously loaded
+          this.router.navigated = false;
+          // Scroll back to top if needed
+          window.scrollTo(0, 0);
+        }
+      }
+    });
   }
 }

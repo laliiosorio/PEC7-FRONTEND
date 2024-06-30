@@ -1,6 +1,32 @@
-<p>article-detail works!</p>
-<div *ngIf="article">
-  <h1>{{ article.name }}</h1>
-  <p>{{ article.description }}</p>
-  <p>Quantity: {{ article.quantity }}</p>
+<div class="container">
+  <div class="row" *ngIf="article">
+    <div class="panel panel-default panel--styled">
+      <div class="panel-body">
+        <div class="col-md-4">
+          <img
+            class="img-responsive"
+            [src]="article.imageUrl | defaultImage"
+            alt="Artículo" />
+        </div>
+        <div class="col-md-8">
+          <h2>{{ article.name }}</h2>
+          <div class="col-md-4 text-left">
+            <h5>
+              Precio
+              <span class="itemPrice">
+                {{ article.price | currencyFormat }}</span
+              >
+            </h5>
+          </div>
+
+          <div class="col-md-4 text-left">
+            <h5>
+              Cantidad
+              <span class="itemPrice">{{ article.quantityInCart }}</span>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

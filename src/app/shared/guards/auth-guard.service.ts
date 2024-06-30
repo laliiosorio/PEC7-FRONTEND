@@ -8,10 +8,9 @@ import { AuthStoreService } from '../../auth/services/auth-store.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private authStore: AuthStoreService) {}
+  constructor(private router: Router, private authStore: AuthStoreService) { }
 
   canActivate():
-  
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean

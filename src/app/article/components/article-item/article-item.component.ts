@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Article } from '../../models/article.model';
 import { ArticleQuantityChange } from '../../models/article-quantity-change.model';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-article-item',
   templateUrl: './article-item.component.html',
@@ -17,7 +17,7 @@ export class ArticleItemComponent {
     quantityInCart: 0
   };
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   @Output() quantityChange: EventEmitter<ArticleQuantityChange> = new EventEmitter<ArticleQuantityChange>();
 
@@ -31,6 +31,10 @@ export class ArticleItemComponent {
       this.article.quantityInCart--;
       this.emitQuantityChange();
     }
+  }
+
+  navigateToDetail(id: number): void {
+    this.router.navigate(['/article', id]);
   }
 
   private emitQuantityChange() {

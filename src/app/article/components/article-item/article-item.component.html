@@ -1,4 +1,4 @@
-<section class="article-item">
+<section class="article-item" (click)="navigateToDetail(article.id)">
   <img
     class="article-img"
     [src]="article.imageUrl | defaultImage"
